@@ -49,3 +49,21 @@ router.GET(…){…}：创建不同的 HTTP 方法绑定到Handlers中，也支�
 gin.H{…}：就是一个map[string]interface{}
 gin.Context：Context是gin中的上下文，它允许我们在中间件之间传递变量、管理流、验证 JSON 请求、响应 JSON 请求等，在gin中包含大量Context的方法，例如我们常用的DefaultQuery、Query、DefaultPostForm、PostForm等等
 ```
+
+```
+Gin：Golang 的一个微框架，性能极佳。
+beego-validation：本节采用的 beego 的表单验证库，中文文档。
+gorm，对开发人员友好的 ORM 框架，英文文档
+com，一个小而美的工具包。
+
+models.go
+
+import (
+	"fmt"
+	"github.com/EDDYCJY/go-example-1/pkg/setting"
+	"github.com/jinzhu/gorm"
+	"log"
+	_"github.com/go-sql-driver/mysql" //注意这里会报错需要手动引入
+)
+
+```

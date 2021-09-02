@@ -3,6 +3,7 @@ package models
 import (
 	"fmt"
 	"github.com/EDDYCJY/go-example-1/pkg/setting"
+	_ "github.com/go-sql-driver/mysql" //注意这里会报错需要手动引入
 	"github.com/jinzhu/gorm"
 	"log"
 )
@@ -47,6 +48,7 @@ func init() {
 		return tablePrefix + defaultTableName
 	}
 
+	fmt.Println(db == nil)
 	db.SingularTable(true)
 	db.LogMode(true)
 	db.DB().SetMaxIdleConns(10)
