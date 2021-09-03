@@ -67,3 +67,10 @@ import (
 )
 
 ```
+
+
+```
+顺序
+router.go --> api v1 article.go ---> models article.go
+
+```
