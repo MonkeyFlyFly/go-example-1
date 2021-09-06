@@ -74,3 +74,54 @@ import (
 router.go --> api v1 article.go ---> models article.go
 
 ```
+
+
+```
+db:
+CREATE TABLE `blog_auth` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) DEFAULT '' COMMENT '账号',
+  `password` varchar(50) DEFAULT '' COMMENT '密码',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `blog`.`blog_auth` (`id`, `username`, `password`) VALUES (null, 'test', 'test123456');
+
+
+加入auth认证
+jwt
+
+go get -u github.com/dgrijalva/jwt-go
+
+step：
+
+我们在pkg下的util目录新建jwt.go
+我们在middleware下新建jwt目录，新建jwt.go文件
+在models下新建auth.go文件
+在routers下的api目录新建auth.go文件
+我们打开routers目录下的router.go
+
+验证Token
+http://127.0.0.1:8000/auth?username=test&password=test123456
+
+{
+    "code": 200,
+    "data": {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJwYXNzd29yZCI6InRlc3QxMjM0NTYiLCJleHAiOjE2MzA5NTM3MzgsImlzcyI6Imdpbi1ibG9nIn0.bDimk-93IDLMC0i8oucHv-CjU6v9F2OkPEBxcfhe0WU"
+    },
+    "msg": "ok"
+}
+
+
+将中间件接入Gin
+ router.go --> apiv1.Use(jwt.JWT())
+
+验证
+{
+    "code": 400,
+    "data": null,
+    "msg": "请求参数错误"
+}
+
+127.0.0.1:8000/api/v1/stu/2?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJwYXNzd29yZCI6InRlc3QxMjM0NTYiLCJleHAiOjE2MzA5NTQxMzYsImlzcyI6Imdpbi1ibG9nIn0.VAOQzwRzxWPS6kIzpLioSQgwRJrj6t0KkVy0GUwqB7c
+```
