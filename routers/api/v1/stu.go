@@ -3,6 +3,7 @@ package v1
 import (
 	"github.com/EDDYCJY/go-example-1/models"
 	"github.com/EDDYCJY/go-example-1/pkg/e"
+	"github.com/EDDYCJY/go-example-1/pkg/logging"
 	"github.com/gin-gonic/gin"
 	"github.com/unknwon/com"
 	"net/http"
@@ -39,6 +40,8 @@ func GetStu(c *gin.Context) {
 	//根据ID查询
 	id := c.Param("id")
 	data := models.GetStu(id)
+
+	logging.Info(data, "------------------")
 
 	c.JSON(http.StatusOK, gin.H{
 		"code": e.SUCCESS,

@@ -3,10 +3,10 @@ package api
 import (
 	"github.com/EDDYCJY/go-example-1/models"
 	"github.com/EDDYCJY/go-example-1/pkg/e"
+	"github.com/EDDYCJY/go-example-1/pkg/logging"
 	"github.com/EDDYCJY/go-example-1/pkg/util"
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
-	"log"
 	"net/http"
 )
 
@@ -42,7 +42,7 @@ func GetAuth(c *gin.Context) {
 		}
 	} else {
 		for _, err := range valid.Errors {
-			log.Println(err.Key, err.Message)
+			logging.Info(err.Key, err.Message)
 		}
 	}
 

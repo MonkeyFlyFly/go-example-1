@@ -125,3 +125,14 @@ http://127.0.0.1:8000/auth?username=test&password=test123456
 
 127.0.0.1:8000/api/v1/stu/2?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJwYXNzd29yZCI6InRlc3QxMjM0NTYiLCJleHAiOjE2MzA5NTQxMzYsImlzcyI6Imdpbi1ibG9nIn0.VAOQzwRzxWPS6kIzpLioSQgwRJrj6t0KkVy0GUwqB7c
 ```
+
+
+```
+日志
+logging --> log.go --> file.go 
+
+业务调用
+"github.com/EDDYCJY/go-example-1/pkg/logging"
+
+logging.Info(data, "------------------")
+```
