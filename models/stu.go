@@ -30,5 +30,12 @@ func AddStu(data map[string]interface{}) bool {
 		Age:  data["age"].(int),
 		Name: data["name"].(string),
 	})
+
+	return true
+}
+
+func DeleteStu(id int) bool {
+	db.Where("id = ?", id).Delete(Stu{})
+
 	return true
 }

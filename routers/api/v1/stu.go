@@ -32,6 +32,8 @@ func EditStu(c *gin.Context) {
 }
 
 func DelStu(c *gin.Context) {
+	id := com.StrTo(c.Param("id")).MustInt()
+	models.DeleteStu(id)
 }
 
 //根据条件查询
