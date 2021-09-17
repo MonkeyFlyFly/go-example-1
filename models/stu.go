@@ -39,3 +39,9 @@ func DeleteStu(id int) bool {
 
 	return true
 }
+
+func CleanAllStu() bool {
+	db.Unscoped().Where("deleted_on != ? ", 0).Delete(&Stu{})
+
+	return true
+}

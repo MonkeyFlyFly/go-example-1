@@ -219,3 +219,30 @@ Cron 特殊字符
 @daily (or @midnight)	每天午夜运行一次	0 0 0 * * *
 @hourly	每小时运行一次	0 0 * * * *
 ```
+
+#### 利用cron进行硬删除
+```
+注意硬删除要使用 Unscoped()，这是 GORM 的约定
+
+func CleanAllStu() bool {
+	db.Unscoped().Where("deleted_on != ? ", 0).Delete(&Stu{})
+
+	return true
+}
+
+time.NewTimer + for + select + t1.Reset
+如果你是初学者，大概会有疑问，这是干嘛用的？
+
+**（1）time.NewTimer **
+
+会创建一个新的定时器，持续你设定的时间 d 后发送一个 channel 消息
+
+（2）for + select
+
+阻塞 select 等待 channel
+
+（3）t1.Reset
+
+会重置定时器，让它重新开始计时
+
+```
