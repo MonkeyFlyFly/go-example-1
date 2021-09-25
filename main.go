@@ -1,14 +1,13 @@
 package main
 
 import (
-	"fmt"
+	"github.com/EDDYCJY/go-example-1/models"
+	"github.com/EDDYCJY/go-example-1/pkg/logging"
 	"github.com/EDDYCJY/go-example-1/pkg/setting"
-	"github.com/EDDYCJY/go-example-1/routers"
-	"net/http"
 )
 
 func main() {
-	router := routers.InitRouter()
+	//router := routers.InitRouter()
 
 	/***
 	Addr：监听的 TCP 地址，格式为:8000
@@ -22,13 +21,17 @@ func main() {
 	ConnState：指定一个可选的回调函数，当客户端连接发生变化时调用
 	ErrorLog：指定一个可选的日志记录器，用于接收程序的意外行为和底层系统错误；如果未设置或为nil则默认以日志包的标准日志记录器完成（也就是在控制台输出）
 	*/
-	s := &http.Server{
-		Addr:           fmt.Sprintf(":%d", setting.HTTPPort),
-		Handler:        router,
-		ReadTimeout:    setting.ReadTimeout,
-		WriteTimeout:   setting.WriteTimeout,
-		MaxHeaderBytes: 1 << 20,
-	}
+	//s := &http.Server{
+	//	Addr:           fmt.Sprintf(":%d", setting.HTTPPort),
+	//	Handler:        router,
+	//	ReadTimeout:    setting.ReadTimeout,
+	//	WriteTimeout:   setting.WriteTimeout,
+	//	MaxHeaderBytes: 1 << 20,
+	//}
+	//
+	//s.ListenAndServe()
 
-	s.ListenAndServe()
+	setting.Setup()
+	models.Setup()
+	logging.Setup()
 }

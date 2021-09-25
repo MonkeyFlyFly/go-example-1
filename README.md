@@ -246,3 +246,20 @@ time.NewTimer + for + select + t1.Reset
 会重置定时器，让它重新开始计时
 
 ```
+
+
+#### 第一步
+```
+将散落在其他文件里的配置都删掉，统一在 setting 中处理以及修改 init 函数为 Setup 方法
+
+打开 pkg/setting/setting.go 文件
+
+将 models.go、setting.go、pkg/logging/log.go 的 init 函数修改为 Setup 方法
+将 models/models.go 独立读取的 DB 配置项删除，改为统一读取 setting
+将 pkg/logging/file 独立的 LOG 配置项删除，改为统一读取 setting
+```
+
+#### 第二步
+```
+在这一步我们要设置初始化的流程，打开 main.go 文件，修改内容
+```

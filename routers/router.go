@@ -3,7 +3,6 @@ package routers
 import (
 	_ "github.com/EDDYCJY/go-example-1/docs"
 	"github.com/EDDYCJY/go-example-1/middleware/jwt"
-	"github.com/EDDYCJY/go-example-1/pkg/setting"
 	"github.com/EDDYCJY/go-example-1/routers/api"
 	"github.com/EDDYCJY/go-example-1/routers/api/v1"
 	"github.com/gin-gonic/gin"
@@ -20,7 +19,9 @@ func InitRouter() *gin.Engine {
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
-	gin.SetMode(setting.RunMode)
+	//gin.SetMode(setting.RunMode)
+
+	r.POST("/upload", api.UploadImage)
 
 	r.GET("/auth", api.GetAuth)
 

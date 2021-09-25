@@ -1,0 +1,3 @@
+INSERT INTO `blog_stu` VALUES ('1', 12, 'zs', NULL, 0, NULL, NULL);
+INSERT INTO `blog_stu` VALUES ('2', 22, 'ls', NULL, 0, NULL, NULL);
+INSERT INTO `blog_stu` VALUES ('3', 33, 'zs', 1631635678, 1631635678, NULL, NULL);
