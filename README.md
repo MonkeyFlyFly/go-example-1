@@ -262,4 +262,30 @@ time.NewTimer + for + select + t1.Reset
 #### 第二步
 ```
 在这一步我们要设置初始化的流程，打开 main.go 文件，修改内容
+setting.Setup()
+	models.Setup()
+	logging.Setup()
+
+	routersInit := routers.InitRouter()
+	readTimeout := setting.ServerSetting.ReadTimeout
+	writeTimeout := setting.ServerSetting.WriteTimeout
+	endPoint := fmt.Sprintf(":%d", setting.ServerSetting.HttpPort)
+	maxHeaderBytes := 1 << 20
+
+	server := &http.Server{
+		Addr:           endPoint,
+		Handler:        routersInit,
+		ReadTimeout:    readTimeout,
+		WriteTimeout:   writeTimeout,
+		MaxHeaderBytes: maxHeaderBytes,
+	}
+
+	server.ListenAndServe()
+```
+
+
+#### 前端能够访问到图片
+```
+http.FileServer
+
 ```

@@ -46,20 +46,17 @@ var DatabaseSetting = &Database{}
 
 func Setup() {
 	Cfg, err := ini.Load("conf/app.ini")
-
 	if err != nil {
 		log.Fatalf("Fail to parse 'conf/app.ini': %v", err)
 	}
-	//APP
-	err = Cfg.Section("app").MapTo(AppSetting)
 
+	err = Cfg.Section("app").MapTo(AppSetting)
 	if err != nil {
 		log.Fatalf("Cfg.MapTo AppSetting err: %v", err)
 	}
 
 	AppSetting.ImageMaxSize = AppSetting.ImageMaxSize * 1024 * 1024
 
-	//Server
 	err = Cfg.Section("server").MapTo(ServerSetting)
 	if err != nil {
 		log.Fatalf("Cfg.MapTo ServerSetting err: %v", err)
@@ -68,10 +65,8 @@ func Setup() {
 	ServerSetting.ReadTimeout = ServerSetting.ReadTimeout * time.Second
 	ServerSetting.WriteTimeout = ServerSetting.WriteTimeout * time.Second
 
-	//DataBase
 	err = Cfg.Section("database").MapTo(DatabaseSetting)
 	if err != nil {
 		log.Fatalf("Cfg.MapTo DatabaseSetting err: %v", err)
 	}
-
 }

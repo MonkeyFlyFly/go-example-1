@@ -2,10 +2,11 @@ package models
 
 import (
 	"fmt"
-	"github.com/EDDYCJY/go-example-1/pkg/setting"
-	_ "github.com/go-sql-driver/mysql" //注意这里会报错需要手动引入
-	"github.com/jinzhu/gorm"
 	"log"
+
+	"github.com/EDDYCJY/go-example-1/pkg/setting"
+	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"time"
 )
 
@@ -27,7 +28,7 @@ func Setup() {
 		setting.DatabaseSetting.Name))
 
 	if err != nil {
-		log.Fatalf("models.Setup err: %v", err)
+		log.Println(err)
 	}
 
 	gorm.DefaultTableNameHandler = func(db *gorm.DB, defaultTableName string) string {
@@ -40,14 +41,13 @@ func Setup() {
 	//db.Callback().Delete().Replace("gorm:delete", deleteCallback)
 	db.DB().SetMaxIdleConns(10)
 	db.DB().SetMaxOpenConns(100)
-
 }
 
 func CloseDB() {
 	defer db.Close()
 }
 
-// 回调方法
+// updateTimeStampForCreateCallback will set `CreatedOn`, `ModifiedOn` when creating
 func updateTimeStampForCreateCallback(scope *gorm.Scope) {
 	if !scope.HasError() {
 		nowTime := time.Now().Unix()
@@ -65,6 +65,7 @@ func updateTimeStampForCreateCallback(scope *gorm.Scope) {
 	}
 }
 
+// updateTimeStampForUpdateCallback will set `ModifiedOn` when updating
 func updateTimeStampForUpdateCallback(scope *gorm.Scope) {
 	if _, ok := scope.Get("gorm:update_column"); !ok {
 		scope.SetColumn("ModifiedOn", time.Now().Unix())

@@ -1,9 +1,12 @@
 package main
 
 import (
+	"fmt"
 	"github.com/EDDYCJY/go-example-1/models"
 	"github.com/EDDYCJY/go-example-1/pkg/logging"
 	"github.com/EDDYCJY/go-example-1/pkg/setting"
+	"github.com/EDDYCJY/go-example-1/routers"
+	"net/http"
 )
 
 func main() {
@@ -30,8 +33,23 @@ func main() {
 	//}
 	//
 	//s.ListenAndServe()
-
 	setting.Setup()
 	models.Setup()
 	logging.Setup()
+
+	routersInit := routers.InitRouter()
+	readTimeout := setting.ServerSetting.ReadTimeout
+	writeTimeout := setting.ServerSetting.WriteTimeout
+	endPoint := fmt.Sprintf(":%d", setting.ServerSetting.HttpPort)
+	maxHeaderBytes := 1 << 20
+
+	server := &http.Server{
+		Addr:           endPoint,
+		Handler:        routersInit,
+		ReadTimeout:    readTimeout,
+		WriteTimeout:   writeTimeout,
+		MaxHeaderBytes: maxHeaderBytes,
+	}
+
+	server.ListenAndServe()
 }
