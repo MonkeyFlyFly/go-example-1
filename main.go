@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/EDDYCJY/go-example-1/models"
+	"github.com/EDDYCJY/go-example-1/pkg/gredis"
 	"github.com/EDDYCJY/go-example-1/pkg/logging"
 	"github.com/EDDYCJY/go-example-1/pkg/setting"
 	"github.com/EDDYCJY/go-example-1/routers"
@@ -36,6 +37,7 @@ func main() {
 	setting.Setup()
 	models.Setup()
 	logging.Setup()
+	gredis.Setup()
 
 	routersInit := routers.InitRouter()
 	readTimeout := setting.ServerSetting.ReadTimeout
